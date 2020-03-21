@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Flex, Box } from "rebass";
+import { Flex, Box, Text } from "rebass";
 import CanvasJSReact from "../charts/canvasjs.react";
 import { Label, Select } from "@rebass/forms";
 import { format } from "date-fns";
+
+import { Cell, PieChart, Pie, ResponsiveContainer, Tooltip } from "recharts";
+
+import StateData from "./StateData";
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -13,7 +17,7 @@ const Dashboard = () => {
   const [country, setCountry] = useState("IN");
   const [countryError, setCountryError] = useState(false);
   const [globalSummary, setGlobalSummary] = useState(null);
-  const [dailyData, setDailyData] = useState(null);
+  const [stateData, setStateData] = useState(null);
 
   const getCountriesSummary = async () => {
     let countries = await axios.get(`https://covid19.mathdro.id/api/daily`);
@@ -46,10 +50,14 @@ const Dashboard = () => {
       //     `https://covid19.mathdro.id/api/daily/${formattedDate}`
       //   );
 
-      let daily = await axios.get(`https://covid19.mathdro.id/api/confirmed`);
+      let stateReport = await axios.get(
+        `https://api.rootnet.in/covid19-in/stats/latest`
+      );
 
       //   const reduced = daily.reduce((acc,(item)=> []))
-      console.log("DAILY", daily);
+
+      console.log("DAILY", stateReport.data.data.regional);
+      setStateData(stateReport.data.data.regional);
     }
     fetchData();
   }, []);
@@ -103,6 +111,23 @@ const Dashboard = () => {
       }
     ]
   };
+
+  const globalChartData = [
+    {
+      name: "Confirmed Cases",
+      value: globalSummary && globalSummary.confirmed.value
+    },
+    {
+      name: "Death",
+      value: globalSummary && globalSummary.deaths.value
+    },
+    {
+      name: "Recovered",
+      value: globalSummary && globalSummary.recovered.value
+    }
+  ];
+
+  const COLORS = ["#b69b2e", "#c22121", "#21c291"];
 
   //   console.log("country data is ", countries);
   //console.log("global summary-->  ", globalSummary);
@@ -210,8 +235,43 @@ const Dashboard = () => {
             </Box>
 
             <Box sx={{ padding: "16px" }} width={["100%", 1 / 2]}>
-              {globalSummary && <CanvasJSChart options={options} />}
+              {globalSummary && (
+                <Box width={["100%", 500]} height={250}>
+                  <Flex justifyContent="center" alignItems="center">
+                    <Box>
+                      <Text sx={{ fontSize: "1.8rem" }}>Global Status</Text>
+                    </Box>
+                  </Flex>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart height={250}>
+                      <Pie
+                        data={globalChartData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={120}
+                        innerRadius={20}
+                        label
+                        fill="#8884d8"
+                      >
+                        {globalChartData.map((entry, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={COLORS[index % COLORS.length]}
+                            label={entry.name}
+                          />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </Box>
+              )}
             </Box>
+          </Flex>
+          <Flex>
+            <StateData stateData={stateData} />
           </Flex>
         </Box>
       )}
