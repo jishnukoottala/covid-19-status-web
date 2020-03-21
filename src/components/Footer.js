@@ -6,6 +6,7 @@ const Footer = () => {
     <Flex
       sx={{ width: "100%", padding: "16px", color: "#fff" }}
       flexDirection="column"
+      mt="16px"
     >
       <Box sx={{ color: "#fff" }}>Sources: </Box>
       <Box sx={{ color: "#fff" }}>

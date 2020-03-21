@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box } from "rebass";
+import { Flex, Box, Text } from "rebass";
 import {
   BarChart,
   Bar,
@@ -13,23 +13,32 @@ import {
 
 const StateDataComponent = ({ stateData }) => {
   console.log("stateData ", stateData);
+  const stateTotal = stateData.map(item => ({
+    ...item,
+    confirmedCases: item.confirmedCasesIndian + item.confirmedCasesForeign
+  }));
+
+  const COLORS = ["#b69b2e", "#c22121", "#21c291"];
   return (
-    <Box py="10px">
+    <Box py="10px" sx={{ color: "#fff" }} mt={["30px", 0]}>
+      <Flex flex={1} justifyContent="center" alignItems="center">
+        <Box>
+          <Text fontSize="1.2rem">Statewise Status</Text>
+        </Box>
+      </Flex>
+
       <BarChart
-        width={700}
+        width={400}
         height={400}
-        data={stateData}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        data={stateTotal}
+        margin={{ top: 5, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="loc" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="confirmedCasesIndian" fill="#8884d8" />
-        <Bar dataKey="confirmedCasesForeign" fill="#82ca9d" />
-        <Bar dataKey="discharged" fill="green" />
-        <Bar dataKey="deaths" fill="red" />
+        <Bar dataKey="confirmedCases" fill="#8884d8" label="Confirmed Cases" />
       </BarChart>
     </Box>
   );

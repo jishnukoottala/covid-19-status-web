@@ -270,9 +270,7 @@ const Dashboard = () => {
               )}
             </Box>
           </Flex>
-          <Flex>
-            <StateData stateData={stateData} />
-          </Flex>
+          <Flex>{stateData && <StateData stateData={stateData} />}</Flex>
         </Box>
       )}
     </>
