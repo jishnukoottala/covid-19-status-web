@@ -8,36 +8,34 @@ const StateChart = ({ stateData }) => {
     ...item,
     confirmedCasesIndianColor: "green",
     confirmedCasesForeignColor: "yellow",
+    Indian: item.confirmedCasesIndian,
+    Foreign: item.confirmedCasesForeign,
     dischargedColor: "purple",
     deathsColor: "coral"
   }));
 
   return (
-    <Box height={500} sx={{ minHeight: 500 }}>
+    <Box height={500} sx={{ minHeight: 500, backgroundColor: "white" }}>
       <Box>
         <Text fontSize="1.5rem">State wise Status</Text>
       </Box>
       <ResponsiveBar
         data={stateDataToRender}
-        keys={[
-          "confirmedCasesIndian",
-          "confirmedCasesForeign",
-          "discharged",
-          "death"
-        ]}
+        keys={["Indian", "Foreign", "discharged", "death"]}
         indexBy="loc"
-        margin={{ top: 50, bottom: 50 }}
+        margin={{ top: 20, right: 130, bottom: 50, left: 80 }}
         padding={0.3}
         layout="horizontal"
         colors={{ scheme: "nivo" }}
-        borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        borderColor={{ from: "color", modifiers: [["brighter", 1.6]] }}
         axisTop={null}
         axisRight={null}
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "total cases",
+          legend: "Cases",
+          legendColor: "red",
           color: "red",
           legendPosition: "middle",
           legendOffset: 32
@@ -46,7 +44,7 @@ const StateChart = ({ stateData }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "cases",
+          legend: "states",
           legendPosition: "middle",
           legendOffset: -40
         }}
