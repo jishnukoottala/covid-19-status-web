@@ -5,7 +5,7 @@ import CanvasJSReact from "../charts/canvasjs.react";
 import { Label, Select } from "@rebass/forms";
 import { format } from "date-fns";
 
-import { Cell, PieChart, Pie, ResponsiveContainer, Tooltip } from "recharts";
+import { ResponsivePie } from "@nivo/pie";
 
 import StateData from "./StateData";
 
@@ -128,6 +128,38 @@ const Dashboard = () => {
   ];
 
   const COLORS = ["#b69b2e", "#c22121", "#21c291"];
+  const data01 = [
+    {
+      id: "scala",
+      label: "scala",
+      value: 312,
+      color: "hsl(83, 70%, 50%)"
+    },
+    {
+      id: "python",
+      label: "python",
+      value: 95,
+      color: "hsl(16, 70%, 50%)"
+    },
+    {
+      id: "javascript",
+      label: "javascript",
+      value: 448,
+      color: "hsl(106, 70%, 50%)"
+    },
+    {
+      id: "c",
+      label: "c",
+      value: 571,
+      color: "hsl(314, 70%, 50%)"
+    },
+    {
+      id: "go",
+      label: "go",
+      value: 266,
+      color: "hsl(304, 70%, 50%)"
+    }
+  ];
 
   //   console.log("country data is ", countries);
   //console.log("global summary-->  ", globalSummary);
@@ -242,30 +274,122 @@ const Dashboard = () => {
                       <Text sx={{ fontSize: "1.8rem" }}>Global Status</Text>
                     </Box>
                   </Flex>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart height={250}>
-                      <Pie
-                        data={globalChartData}
-                        dataKey="value"
-                        nameKey="name"
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={120}
-                        innerRadius={20}
-                        label
-                        fill="#8884d8"
-                      >
-                        {globalChartData.map((entry, index) => (
-                          <Cell
-                            key={`cell-${index}`}
-                            fill={COLORS[index % COLORS.length]}
-                            label={entry.name}
-                          />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <ResponsivePie
+                    data={data01}
+                    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+                    innerRadius={0.5}
+                    padAngle={0.7}
+                    cornerRadius={3}
+                    colors={{ scheme: "nivo" }}
+                    borderWidth={1}
+                    borderColor={{
+                      from: "color",
+                      modifiers: [["darker", 0.2]]
+                    }}
+                    radialLabelsSkipAngle={10}
+                    radialLabelsTextXOffset={6}
+                    radialLabelsTextColor="#333333"
+                    radialLabelsLinkOffset={0}
+                    radialLabelsLinkDiagonalLength={16}
+                    radialLabelsLinkHorizontalLength={24}
+                    radialLabelsLinkStrokeWidth={1}
+                    radialLabelsLinkColor={{ from: "color" }}
+                    slicesLabelsSkipAngle={10}
+                    slicesLabelsTextColor="#333333"
+                    animate={true}
+                    motionStiffness={90}
+                    motionDamping={15}
+                    defs={[
+                      {
+                        id: "dots",
+                        type: "patternDots",
+                        background: "inherit",
+                        color: "rgba(255, 255, 255, 0.3)",
+                        size: 4,
+                        padding: 1,
+                        stagger: true
+                      },
+                      {
+                        id: "lines",
+                        type: "patternLines",
+                        background: "inherit",
+                        color: "rgba(255, 255, 255, 0.3)",
+                        rotation: -45,
+                        lineWidth: 6,
+                        spacing: 10
+                      }
+                    ]}
+                    fill={[
+                      {
+                        match: {
+                          id: "ruby"
+                        },
+                        id: "dots"
+                      },
+                      {
+                        match: {
+                          id: "c"
+                        },
+                        id: "dots"
+                      },
+                      {
+                        match: {
+                          id: "go"
+                        },
+                        id: "dots"
+                      },
+                      {
+                        match: {
+                          id: "python"
+                        },
+                        id: "dots"
+                      },
+                      {
+                        match: {
+                          id: "scala"
+                        },
+                        id: "lines"
+                      },
+                      {
+                        match: {
+                          id: "lisp"
+                        },
+                        id: "lines"
+                      },
+                      {
+                        match: {
+                          id: "elixir"
+                        },
+                        id: "lines"
+                      },
+                      {
+                        match: {
+                          id: "javascript"
+                        },
+                        id: "lines"
+                      }
+                    ]}
+                    legends={[
+                      {
+                        anchor: "bottom",
+                        direction: "row",
+                        translateY: 56,
+                        itemWidth: 100,
+                        itemHeight: 18,
+                        itemTextColor: "#999",
+                        symbolSize: 18,
+                        symbolShape: "circle",
+                        effects: [
+                          {
+                            on: "hover",
+                            style: {
+                              itemTextColor: "#000"
+                            }
+                          }
+                        ]
+                      }
+                    ]}
+                  />
                 </Box>
               )}
             </Box>

@@ -1,15 +1,5 @@
 import React from "react";
 import { Flex, Box, Text } from "rebass";
-import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} from "recharts";
 
 const StateDataComponent = ({ stateData }) => {
   console.log("stateData ", stateData);
@@ -26,20 +16,6 @@ const StateDataComponent = ({ stateData }) => {
           <Text fontSize="1.2rem">Statewise Status</Text>
         </Box>
       </Flex>
-
-      <BarChart
-        width={400}
-        height={400}
-        data={stateTotal}
-        margin={{ top: 5, bottom: 5 }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="loc" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="confirmedCases" fill="#8884d8" label="Confirmed Cases" />
-      </BarChart>
     </Box>
   );
 };

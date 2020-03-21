@@ -7,6 +7,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.9",
+    "@nivo/bar": "^0.61.1",
+    "@nivo/pie": "^0.61.1",
     "@rebass/forms": "^4.0.6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -18,8 +20,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
-    "rebass": "^4.0.7",
-    "recharts": "^1.8.5"
+    "rebass": "^4.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
