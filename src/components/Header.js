@@ -3,7 +3,12 @@ import { Flex, Box, Text } from "rebass";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobe, faHome, faThList } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGlobe,
+  faHome,
+  faThList,
+  faQuestionCircle
+} from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   let location = useLocation();
@@ -28,13 +33,7 @@ const Header = () => {
           }}
         >
           {" "}
-          {`Covid 19 Status - ${
-            location.pathname === "/"
-              ? "India"
-              : location.pathname === "/country"
-              ? "Countries"
-              : "World"
-          }`}
+          {getTitle(location.pathname)}
         </Text>
       </Box>
       <Flex alignSelf="flex-end" mt={[2, 0]}>
@@ -54,9 +53,35 @@ const Header = () => {
             <FontAwesomeIcon icon={faGlobe} size="lg" color="#6a24c0" />
           </Link>
         </Box>
+        <Box px="8px">
+          <Link to="/faq" as="div">
+            <FontAwesomeIcon
+              icon={faQuestionCircle}
+              size="lg"
+              color="#6a24c0"
+            />
+          </Link>
+        </Box>
       </Flex>
     </Flex>
   );
+};
+
+const getTitle = location => {
+  switch (location) {
+    case "/":
+      return "Covid 19 Status - India";
+
+    case "/country":
+      return "Covid 19 Status - Countries";
+    case "/world":
+      return "Covid 19 Status - World";
+    case "/faq":
+      return "Covid 19 - FAQ";
+
+    default:
+      return "Covid 19 Status";
+  }
 };
 
 export default Header;

@@ -9,18 +9,29 @@ const Footer = () => {
       mt={6}
     >
       <Box sx={{ color: "#fff" }}>Sources: </Box>
-      <Box sx={{ color: "#fff" }}>
-        <a href="https://github.com/mathdroid/covid-19-api" target="__blank">
-          Mathdroid
-        </a>
-      </Box>
-      <Box sx={{ color: "#fff" }}>
-        <a href="https://github.com/amodm/api-covid19-in" target="__blank">
-          API-covid-19-India
-        </a>
-      </Box>
+      <FooterBox
+        link="https://github.com/mathdroid/covid-19-api"
+        text="Mathdroid"
+      />
+      <FooterBox
+        link="https://github.com/amodm/api-covid19-in"
+        text="API-covid-19-India"
+      />
+      <FooterBox link="https://www.who.int/" text="World Health Organization" />
+      <FooterBox
+        link="https://www.mohfw.gov.in/"
+        text="Department of Health and Family Welfare"
+      />
     </Flex>
   );
 };
+
+const FooterBox = ({ link, text }) => (
+  <Box>
+    <a href={`${link}`} target="__blank" style={{ color: "#800080" }}>
+      {text}
+    </a>
+  </Box>
+);
 
 export default Footer;
