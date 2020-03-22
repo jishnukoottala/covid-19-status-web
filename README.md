@@ -16,3 +16,11 @@ Thanks to
 
 Unofficial source
 [unofficial sources](https://api.rootnet.in/covid19-in/unofficial/sources)
+
+#### Todos
+
+1. Progressive Web App
+2. Try to get more info
+3. Create flashcards for FAQ, - data from mohfw
+4. Designer svgs for DOs and DONTs
+5. add 404 page
