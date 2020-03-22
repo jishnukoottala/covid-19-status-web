@@ -1,40 +1,55 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Flex, Box, Text } from "rebass";
-import CanvasJSReact from "../charts/canvasjs.react";
-import { Label, Select } from "@rebass/forms";
-import { format } from "date-fns";
+import { Flex, Box } from "rebass";
+
 import StatusDashCard from "../views/StatusDashCard";
 import StateChart from "../views/StateChart";
+import ContactNumberBox from "../views/ContactNumberBox";
+import Loader from "../views/Loader";
+import FormattedDateCard from "../views/FormattedDateCard";
 
 const HomePage = () => {
   const [confirmed, setConfirmed] = useState(null);
   const [recovered, setRecovered] = useState(null);
   const [deaths, setDeaths] = useState(null);
   const [stateData, setStateData] = useState(null);
+  const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
+
+  const [regionalContactData, setRegionalContactData] = useState(null);
   useEffect(() => {
     async function getData() {
       try {
-        const results = await axios.get(
-          `https://covid19.mathdro.id/api/countries/IND`
-        );
-
-        if (results.status === 200) {
-          const { data } = results;
-
-          setConfirmed(data.confirmed.value);
-          setRecovered(data.recovered.value);
-          setDeaths(data.deaths.value);
-        }
-
-        let stateReport = await axios.get(
+        let latestReport = await axios.get(
           `https://api.rootnet.in/covid19-in/stats/latest`
         );
+
+        if (latestReport.status === 200) {
+          const { data } = latestReport;
+
+          setConfirmed(
+            data.data.summary.confirmedCasesIndian +
+              data.data.summary.confirmedCasesForeign
+          );
+          setRecovered(data.data.summary.discharged);
+          setDeaths(data.data.summary.deaths);
+          setLastUpdatedTime(data.lastRefreshed);
+        }
+
         //console.log("stateREsults - ", stateReport);
 
-        if (stateReport.status === 200) {
-          console.log("here ");
-          setStateData(stateReport.data.data.regional);
+        let contactDetails = await axios.get(
+          `https://api.rootnet.in/covid19-in/contacts`
+        );
+
+        //console.log("contactDetails -", contactDetails);
+
+        setRegionalContactData(
+          contactDetails.status === 200
+            ? contactDetails.data.data.contacts.regional
+            : null
+        );
+        if (latestReport.status === 200) {
+          setStateData(latestReport.data.data.regional);
         }
       } catch (error) {}
     }
@@ -42,22 +57,31 @@ const HomePage = () => {
     getData();
   }, []);
 
-  //console.log("stateData is -- ", stateData);
+  //console.log("regionalContacts is -- ",);
 
   return (
-    <Box sx={{ color: "#fff" }} mb={4}>
-      <Flex
-        flex={1}
-        justifyContent="space-between"
-        flexDirection={["column", "row"]}
-        p={4}
-      >
-        <StatusDashCard title={"Confirmed"} text={confirmed} />
-        <StatusDashCard title={"Recovered"} text={recovered} />
-        <StatusDashCard title={"Deaths"} text={deaths} />
-      </Flex>
-      <Box mt={3}>{stateData && <StateChart stateData={stateData} />}</Box>
-    </Box>
+    <>
+      {!confirmed && <Loader />}
+      {confirmed && (
+        <Box sx={{ color: "#fff" }} mb={4} p={4}>
+          <Flex
+            flex={1}
+            justifyContent="space-between"
+            flexDirection={["column", "row"]}
+            p={4}
+          >
+            <StatusDashCard title={"Confirmed"} text={confirmed} />
+            <StatusDashCard title={"Recovered"} text={recovered} />
+            <StatusDashCard title={"Deaths"} text={deaths} />
+          </Flex>
+          <FormattedDateCard updateTime={lastUpdatedTime} />
+          <Box mt={3}>{stateData && <StateChart stateData={stateData} />}</Box>
+          {regionalContactData && (
+            <ContactNumberBox contactDetails={regionalContactData} />
+          )}
+        </Box>
+      )}
+    </>
   );
 };
 

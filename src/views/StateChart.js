@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 import { ResponsiveBar } from "@nivo/bar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChartBar } from "@fortawesome/free-solid-svg-icons";
 
 const StateChart = ({ stateData }) => {
-  console.log("statedata", stateData);
   const stateDataToRender = stateData.map(item => ({
     ...item,
     confirmedCasesIndianColor: "green",
@@ -14,9 +15,12 @@ const StateChart = ({ stateData }) => {
 
   return (
     <Box height={600} sx={{ minHeight: 500, backgroundColor: "inherit" }}>
-      <Box p={4}>
+      <Flex p={4}>
+        <Flex sx={{ alignItems: "center" }} pr={2}>
+          <FontAwesomeIcon icon={faChartBar} color="#ff4c4c" size="lg" />
+        </Flex>{" "}
         <Text fontSize="1.5rem">State wise Status</Text>
-      </Box>
+      </Flex>
       <ResponsiveBar
         data={stateDataToRender}
         keys={["Indian", "Foreign", "discharged", "deaths"]}
@@ -36,40 +40,6 @@ const StateChart = ({ stateData }) => {
           );
         }}
         label={d => `${d.value}`}
-        defs={[
-          {
-            id: "dots",
-            type: "color",
-            background: "red",
-            color: "blue",
-            size: 4,
-            padding: 1,
-            stagger: true
-          },
-          {
-            id: "lines",
-
-            background: "yellow",
-            color: "blue",
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10
-          }
-        ]}
-        fill={[
-          {
-            match: {
-              id: "Indian"
-            },
-            id: "dots"
-          },
-          {
-            match: {
-              id: "Foreign"
-            },
-            id: "lines"
-          }
-        ]}
         borderColor={{ from: "color", modifiers: [["brighter", 1.6]] }}
         axisTop={null}
         axisRight={null}

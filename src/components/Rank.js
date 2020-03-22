@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Flex, Box } from "rebass";
+import { Flex } from "rebass";
 import Countrydata from "./CountryData";
 import Loader from "../views/Loader";
 

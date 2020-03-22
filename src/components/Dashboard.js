@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Flex, Box, Text } from "rebass";
-import CanvasJSReact from "../charts/canvasjs.react";
 import { Label, Select } from "@rebass/forms";
 import { format } from "date-fns";
+import Loader from "../views/Loader";
 
 import { ResponsivePie } from "@nivo/pie";
-
-import StateData from "./StateData";
-
-const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const Dashboard = () => {
   const [countryData, setCountryData] = useState(null);
@@ -17,7 +13,6 @@ const Dashboard = () => {
   const [country, setCountry] = useState("IN");
   const [countryError, setCountryError] = useState(false);
   const [globalSummary, setGlobalSummary] = useState(null);
-  const [stateData, setStateData] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,9 +30,9 @@ const Dashboard = () => {
       const formattedDate = `${today.getMonth() + 1}-${today.getDate() -
         1}-${today.getFullYear()}`;
       console.log("formatted date", formattedDate);
-      let daily = await axios.get(
-        `https://covid19.mathdro.id/api/daily/${formattedDate}`
-      );
+      //   let daily = await axios.get(
+      //     `https://covid19.mathdro.id/api/daily/${formattedDate}`
+      //   );
     }
     fetchData();
   }, []);
@@ -57,55 +52,6 @@ const Dashboard = () => {
     }
     fetchData();
   }, [country]);
-
-  const options = {
-    animationEnabled: true,
-    title: {
-      text: "Global summary"
-    },
-    subtitles: [
-      {
-        text: "",
-        verticalAlign: "center",
-        fontSize: 24
-        //dockInsidePlotArea: true
-      }
-    ],
-    data: [
-      {
-        type: "doughnut",
-        showInLegend: true,
-        indexLabel: "{name}: {y}",
-        yValueFormatString: "##,###''",
-        dataPoints: [
-          {
-            name: "Confirmed Cases",
-            y: globalSummary && globalSummary.confirmed.value
-          },
-          { name: "Death", y: globalSummary && globalSummary.deaths.value },
-          {
-            name: "Recovered",
-            y: globalSummary && globalSummary.recovered.value
-          }
-        ]
-      }
-    ]
-  };
-
-  const globalChartData = [
-    {
-      name: "Confirmed Cases",
-      value: globalSummary && globalSummary.confirmed.value
-    },
-    {
-      name: "Death",
-      value: globalSummary && globalSummary.deaths.value
-    },
-    {
-      name: "Recovered",
-      value: globalSummary && globalSummary.recovered.value
-    }
-  ];
 
   const data01 = [
     {
@@ -134,6 +80,7 @@ const Dashboard = () => {
   console.log("country data-->  ", countryData);
   return (
     <>
+      {!countries && <Loader />}
       {countries && (
         <Box>
           {" "}
