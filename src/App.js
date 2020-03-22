@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import RankPage from "./components/Rank";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -16,8 +16,11 @@ function App() {
           <Route path="/" exact>
             <HomePage />
           </Route>
-          <Route path="/rank">
+          <Route path="/world">
             <RankPage />
+          </Route>
+          <Route path="/country">
+            <Dashboard />
           </Route>
         </Switch>
         <Footer />

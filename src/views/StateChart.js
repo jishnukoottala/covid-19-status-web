@@ -9,24 +9,67 @@ const StateChart = ({ stateData }) => {
     confirmedCasesIndianColor: "green",
     confirmedCasesForeignColor: "yellow",
     Indian: item.confirmedCasesIndian,
-    Foreign: item.confirmedCasesForeign,
-    dischargedColor: "purple",
-    deathsColor: "coral"
+    Foreign: item.confirmedCasesForeign
   }));
 
   return (
-    <Box height={500} sx={{ minHeight: 500, backgroundColor: "white" }}>
-      <Box>
+    <Box height={600} sx={{ minHeight: 500, backgroundColor: "inherit" }}>
+      <Box p={4}>
         <Text fontSize="1.5rem">State wise Status</Text>
       </Box>
       <ResponsiveBar
         data={stateDataToRender}
-        keys={["Indian", "Foreign", "discharged", "death"]}
+        keys={["Indian", "Foreign", "discharged", "deaths"]}
         indexBy="loc"
-        margin={{ top: 20, right: 130, bottom: 50, left: 80 }}
+        margin={{ top: 20, right: 130, bottom: 50, left: 90 }}
         padding={0.3}
         layout="horizontal"
-        colors={{ scheme: "nivo" }}
+        colors={{ scheme: "red_yellow_blue" }}
+        tooltip={function(stateInfo) {
+          return (
+            <span style={{ color: "#000" }}>
+              {`${stateInfo.id}:${stateInfo.value}, Total(active): ${stateInfo
+                .data.confirmedCasesIndian +
+                stateInfo.data.confirmedCasesForeign +
+                stateInfo.data.deaths}`}{" "}
+            </span>
+          );
+        }}
+        label={d => `${d.value}`}
+        defs={[
+          {
+            id: "dots",
+            type: "color",
+            background: "red",
+            color: "blue",
+            size: 4,
+            padding: 1,
+            stagger: true
+          },
+          {
+            id: "lines",
+
+            background: "yellow",
+            color: "blue",
+            rotation: -45,
+            lineWidth: 6,
+            spacing: 10
+          }
+        ]}
+        fill={[
+          {
+            match: {
+              id: "Indian"
+            },
+            id: "dots"
+          },
+          {
+            match: {
+              id: "Foreign"
+            },
+            id: "lines"
+          }
+        ]}
         borderColor={{ from: "color", modifiers: [["brighter", 1.6]] }}
         axisTop={null}
         axisRight={null}
@@ -44,7 +87,7 @@ const StateChart = ({ stateData }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "states",
+          legend: "",
           legendPosition: "middle",
           legendOffset: -40
         }}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Flex, Box } from "rebass";
 import Countrydata from "./CountryData";
+import Loader from "../views/Loader";
 
 const RankPage = () => {
   const [dailyData, setDailyData] = useState(null);
@@ -13,10 +14,8 @@ const RankPage = () => {
         );
 
         const { data } = daily;
-
-        //   const reduced = daily.reduce((acc,(item)=> []))
-        console.log("DAILY", data);
-        setDailyData(data);
+        const sortedData = data && data.sort((a, b) => b.deaths - a.deaths); // ordering the data by descending  order of death
+        setDailyData(sortedData);
       } catch (error) {
         setDailyData(null);
       }
@@ -30,7 +29,7 @@ const RankPage = () => {
           <Countrydata
             key={`${countryData.iso3}-${
               countryData.provinceState ? countryData.provinceState : "-"
-            }`}
+            }-${countryData.long}-${countryData.lat}`}
             country={countryData.countryRegion}
             province={countryData.provinceState}
             confirmed={countryData.confirmed}
@@ -39,7 +38,7 @@ const RankPage = () => {
             active={countryData.active}
           />
         ))}
-      something
+      {!dailyData && <Loader />}
     </Flex>
   );
 };

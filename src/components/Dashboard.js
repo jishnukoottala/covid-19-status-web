@@ -19,18 +19,6 @@ const Dashboard = () => {
   const [globalSummary, setGlobalSummary] = useState(null);
   const [stateData, setStateData] = useState(null);
 
-  const getCountriesSummary = async () => {
-    let countries = await axios.get(`https://covid19.mathdro.id/api/daily`);
-
-    //console.log("countries", countries);
-
-    let countriesSummary = await axios.get(
-      `https://covid19.mathdro.id/api/countries/IND`
-    );
-
-    //console.log("countriesSummary", countriesSummary);
-  };
-
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
@@ -39,25 +27,17 @@ const Dashboard = () => {
 
       const resp = await axios.get(`https://covid19.mathdro.id/api/`);
       const { data } = result;
-      console.log("countries", countries);
+      //console.log("countries", countries);
       setCountries(data);
       setCountry("IND");
       setGlobalSummary(resp.data);
       const today = new Date();
-      const formattedDate = `${today.getMonth() + 1}-${today.getDay() -
+      const formattedDate = `${today.getMonth() + 1}-${today.getDate() -
         1}-${today.getFullYear()}`;
-      //   let daily = await axios.get(
-      //     `https://covid19.mathdro.id/api/daily/${formattedDate}`
-      //   );
-
-      let stateReport = await axios.get(
-        `https://api.rootnet.in/covid19-in/stats/latest`
+      console.log("formatted date", formattedDate);
+      let daily = await axios.get(
+        `https://covid19.mathdro.id/api/daily/${formattedDate}`
       );
-
-      //   const reduced = daily.reduce((acc,(item)=> []))
-
-      console.log("DAILY", stateReport.data.data.regional);
-      setStateData(stateReport.data.data.regional);
     }
     fetchData();
   }, []);
@@ -127,42 +107,31 @@ const Dashboard = () => {
     }
   ];
 
-  const COLORS = ["#b69b2e", "#c22121", "#21c291"];
   const data01 = [
     {
-      id: "scala",
-      label: "scala",
-      value: 312,
-      color: "hsl(83, 70%, 50%)"
+      id: "deaths",
+      label: "Deaths",
+      value: countryData && countryData.deaths.value,
+      color: "red"
     },
+
     {
-      id: "python",
-      label: "python",
-      value: 95,
-      color: "hsl(16, 70%, 50%)"
-    },
-    {
-      id: "javascript",
-      label: "javascript",
-      value: 448,
-      color: "hsl(106, 70%, 50%)"
-    },
-    {
-      id: "c",
-      label: "c",
-      value: 571,
+      id: "Confirmed",
+      label: "Confirmed",
+      value: countryData && countryData.confirmed.value,
+
       color: "hsl(314, 70%, 50%)"
     },
     {
-      id: "go",
-      label: "go",
-      value: 266,
+      id: "recovered",
+      label: "recovered",
+      value: countryData && countryData.recovered.value,
       color: "hsl(304, 70%, 50%)"
     }
   ];
 
   //   console.log("country data is ", countries);
-  //console.log("global summary-->  ", globalSummary);
+  console.log("country data-->  ", countryData);
   return (
     <>
       {countries && (
@@ -173,7 +142,6 @@ const Dashboard = () => {
             sx={{
               width: "100%",
               padding: "16px",
-              backgroundColor: "black",
               color: "#fff"
             }}
             flexDirection={["column", "row"]}
@@ -268,10 +236,10 @@ const Dashboard = () => {
 
             <Box sx={{ padding: "16px" }} width={["100%", 1 / 2]}>
               {globalSummary && (
-                <Box width={["100%", 500]} height={250}>
+                <Box width={["100%", 700]} height={350}>
                   <Flex justifyContent="center" alignItems="center">
                     <Box>
-                      <Text sx={{ fontSize: "1.8rem" }}>Global Status</Text>
+                      <Text sx={{ fontSize: "1.8rem" }}>Country Status</Text>
                     </Box>
                   </Flex>
                   <ResponsivePie
@@ -280,7 +248,7 @@ const Dashboard = () => {
                     innerRadius={0.5}
                     padAngle={0.7}
                     cornerRadius={3}
-                    colors={{ scheme: "nivo" }}
+                    colors={{ scheme: "red_yellow_blue" }}
                     borderWidth={1}
                     borderColor={{
                       from: "color",
@@ -394,7 +362,6 @@ const Dashboard = () => {
               )}
             </Box>
           </Flex>
-          <Flex>{stateData && <StateData stateData={stateData} />}</Flex>
         </Box>
       )}
     </>

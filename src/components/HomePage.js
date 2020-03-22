@@ -45,11 +45,12 @@ const HomePage = () => {
   //console.log("stateData is -- ", stateData);
 
   return (
-    <Box sx={{ color: "#fff" }} p={4}>
+    <Box sx={{ color: "#fff" }} mb={4}>
       <Flex
         flex={1}
         justifyContent="space-between"
         flexDirection={["column", "row"]}
+        p={4}
       >
         <StatusDashCard title={"Confirmed"} text={confirmed} />
         <StatusDashCard title={"Recovered"} text={recovered} />
