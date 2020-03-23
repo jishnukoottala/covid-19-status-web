@@ -172,7 +172,7 @@ const Dashboard = () => {
                   </Flex>
                   <ResponsivePie
                     data={data01}
-                    margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+                    margin={{ top: 40, right: 60, bottom: 80, left: 120 }}
                     innerRadius={0.5}
                     padAngle={0.7}
                     cornerRadius={3}

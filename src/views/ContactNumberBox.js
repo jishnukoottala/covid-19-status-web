@@ -3,17 +3,32 @@ import { Flex, Box, Text } from "rebass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
-const ContactNumberBox = ({ contactDetails }) => {
+const ContactNumberBox = ({ contactDetails, primaryContactData }) => {
+  console.log("primary contact data ,", primaryContactData);
   return (
     <Box mt={6} style={{ color: "#fff" }} p={4}>
-      <Box>
-        <Flex py={4}>
-          <Flex sx={{ alignItems: "center" }} pr={2}>
-            <FontAwesomeIcon icon={faPhone} color="#4cff73" size="lg" />
-          </Flex>{" "}
-          <Text fontSize="1.5rem"> Emergency Contact Numbers</Text>
+      <Flex py={4}>
+        <Flex sx={{ alignItems: "center" }} pr={3}>
+          <FontAwesomeIcon icon={faPhone} color="#4cff73" size="lg" />
+        </Flex>{" "}
+        <Text fontSize="1.5rem"> Emergency Contact Numbers</Text>
+      </Flex>
+      <Box p={4}>
+        <Flex flexDirection={["column", "row"]} justifyContent="space-between">
+          <Box>
+            <Text fontSize="1.3rem">
+              Primary Contact - India : {primaryContactData.number}
+            </Text>
+          </Box>
+          <Box mt={[3, 0]}>
+            <Text fontSize="1.3rem">
+              Toll free number - India : {primaryContactData["number-tollfree"]}
+            </Text>
+          </Box>
+          <Box></Box>
         </Flex>
-
+      </Box>
+      <Box>
         <Box
           sx={{
             display: "grid",

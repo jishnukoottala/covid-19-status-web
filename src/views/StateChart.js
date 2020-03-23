@@ -10,7 +10,9 @@ const StateChart = ({ stateData }) => {
     confirmedCasesIndianColor: "green",
     confirmedCasesForeignColor: "yellow",
     Indian: item.confirmedCasesIndian,
-    Foreign: item.confirmedCasesForeign
+    Foreign: item.confirmedCasesForeign,
+    Discharged: item.discharged,
+    Deaths: item.deaths
   }));
 
   return (
@@ -23,7 +25,7 @@ const StateChart = ({ stateData }) => {
       </Flex>
       <ResponsiveBar
         data={stateDataToRender}
-        keys={["Indian", "Foreign", "discharged", "deaths"]}
+        keys={["Indian", "Foreign", "Discharged", "Deaths"]}
         indexBy="loc"
         margin={{ top: 20, right: 30, bottom: 70, left: 90 }}
         padding={0.3}
@@ -72,8 +74,8 @@ const StateChart = ({ stateData }) => {
             justify: false,
             translateX: -20,
             translateY: 68,
-            itemsSpacing: 2,
-            itemWidth: 80,
+            itemsSpacing: 6,
+            itemWidth: 86,
             itemHeight: 20,
             itemDirection: "left-to-right",
             itemOpacity: 0.85,

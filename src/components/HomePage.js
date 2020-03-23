@@ -14,8 +14,9 @@ const HomePage = () => {
   const [deaths, setDeaths] = useState(null);
   const [stateData, setStateData] = useState(null);
   const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
-
   const [regionalContactData, setRegionalContactData] = useState(null);
+  const [primaryContactData, setPrimaryContactData] = useState(null);
+
   useEffect(() => {
     async function getData() {
       try {
@@ -41,8 +42,11 @@ const HomePage = () => {
           `https://api.rootnet.in/covid19-in/contacts`
         );
 
-        //console.log("contactDetails -", contactDetails);
-
+        setPrimaryContactData(
+          contactDetails.status === 200
+            ? contactDetails.data.data.contacts.primary
+            : null
+        );
         setRegionalContactData(
           contactDetails.status === 200
             ? contactDetails.data.data.contacts.regional
@@ -77,7 +81,10 @@ const HomePage = () => {
           <FormattedDateCard updateTime={lastUpdatedTime} />
           <Box mt={3}>{stateData && <StateChart stateData={stateData} />}</Box>
           {regionalContactData && (
-            <ContactNumberBox contactDetails={regionalContactData} />
+            <ContactNumberBox
+              contactDetails={regionalContactData}
+              primaryContactData={primaryContactData}
+            />
           )}
         </Box>
       )}
