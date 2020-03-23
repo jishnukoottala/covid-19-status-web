@@ -94,7 +94,7 @@ const Dashboard = () => {
             }}
             flexDirection={["column", "row"]}
           >
-            <Box width={1 / 2}>
+            <Box width={["100%", 1 / 2]}>
               <Flex flexDirection="column">
                 <Box sx={{ padding: "16px", fontSize: "1.5rem" }}>
                   <Label htmlFor="country">Country</Label>
