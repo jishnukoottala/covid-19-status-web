@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Flex, Box, Text } from "rebass";
 import { Label, Select } from "@rebass/forms";
-import { format } from "date-fns";
 import Loader from "../views/Loader";
+import StatusDashCard from "../views/StatusDashCard";
+import FormattedDateCard from "../views/FormattedDateCard";
 
 import { ResponsivePie } from "@nivo/pie";
 
@@ -136,46 +137,26 @@ const Dashboard = () => {
                 )}
                 {countryData && (
                   <>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        padding: "16px",
-                        fontSize: "1.5rem"
-                      }}
+                    <Flex
+                      flex={1}
+                      justifyContent="space-between"
+                      flexDirection={["column", "row"]}
+                      p={4}
                     >
-                      Last updated :{" "}
-                      {format(
-                        new Date(countryData.lastUpdate),
-                        "dd/MM/yyyy HH:mm:s"
-                      )}
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        padding: "16px",
-                        fontSize: "1.5rem"
-                      }}
-                    >
-                      Confirmed Cases: {countryData.confirmed.value}
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        padding: "16px",
-                        fontSize: "1.5rem"
-                      }}
-                    >
-                      Deaths : {countryData.deaths.value}
-                    </Box>
-                    <Box
-                      sx={{
-                        width: "100%",
-                        padding: "16px",
-                        fontSize: "1.5rem"
-                      }}
-                    >
-                      Recovered: {countryData.recovered.value}
-                    </Box>
+                      <StatusDashCard
+                        title={"Confirmed"}
+                        text={countryData.confirmed.value}
+                      />
+                      <StatusDashCard
+                        title={"Recovered"}
+                        text={countryData.recovered.value}
+                      />
+                      <StatusDashCard
+                        title={"Deaths"}
+                        text={countryData.deaths.value}
+                      />
+                    </Flex>
+                    <FormattedDateCard updateTime={countryData.lastUpdate} />
                   </>
                 )}
               </Flex>
@@ -195,7 +176,7 @@ const Dashboard = () => {
                     innerRadius={0.5}
                     padAngle={0.7}
                     cornerRadius={3}
-                    colors={{ scheme: "red_yellow_blue" }}
+                    colors={["#d20a0a", "#bc5718", "#28c70f"]}
                     borderWidth={1}
                     borderColor={{
                       from: "color",

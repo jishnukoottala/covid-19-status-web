@@ -25,10 +25,10 @@ const StateChart = ({ stateData }) => {
         data={stateDataToRender}
         keys={["Indian", "Foreign", "discharged", "deaths"]}
         indexBy="loc"
-        margin={{ top: 20, right: 130, bottom: 50, left: 90 }}
+        margin={{ top: 20, right: 30, bottom: 70, left: 90 }}
         padding={0.3}
         layout="horizontal"
-        colors={{ scheme: "red_yellow_blue" }}
+        colors={["#bc5718", "#f3ae30", "#28c70f", "#d20a0a"]}
         tooltip={function(stateInfo) {
           return (
             <span style={{ color: "#000" }}>
@@ -46,7 +46,7 @@ const StateChart = ({ stateData }) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
+          tickRotation: -90,
           legend: "Cases",
           legendColor: "red",
           color: "red",
@@ -67,13 +67,13 @@ const StateChart = ({ stateData }) => {
         legends={[
           {
             dataFrom: "keys",
-            anchor: "bottom-right",
-            direction: "column",
+            anchor: "bottom",
+            direction: "row",
             justify: false,
-            translateX: 120,
-            translateY: 0,
+            translateX: -20,
+            translateY: 68,
             itemsSpacing: 2,
-            itemWidth: 100,
+            itemWidth: 80,
             itemHeight: 20,
             itemDirection: "left-to-right",
             itemOpacity: 0.85,

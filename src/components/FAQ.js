@@ -60,7 +60,7 @@ const Card = ({ question, answer }) => (
   <Box p={3} mb={3}>
     <Flex flexDirection="column">
       <Box>
-        <Text fontSize="2rem" color="#2424ef">
+        <Text fontSize="2rem" color="#7979fa">
           {question}
         </Text>
       </Box>
