@@ -48,7 +48,7 @@ const faqs = [
 
 const FAQPage = () => {
   return (
-    <Box sx={{ color: "#fff" }} mt={4} p={4} mb={4}>
+    <Box mt={4} p={4} mb={4}>
       {faqs.map((item, index) => (
         <Card question={item.question} answer={item.answer} />
       ))}

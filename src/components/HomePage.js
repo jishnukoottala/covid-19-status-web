@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Flex, Box } from "rebass";
+import styled from "styled-components";
 
 import StatusDashCard from "../views/StatusDashCard";
 import StateChart from "../views/StateChart";
@@ -67,7 +68,7 @@ const HomePage = () => {
     <>
       {!confirmed && <Loader />}
       {confirmed && (
-        <Box sx={{ color: "#fff" }} mb={4} p={4}>
+        <HomePageBox mb={4} p={4}>
           <Flex
             flex={1}
             justifyContent="space-between"
@@ -86,10 +87,14 @@ const HomePage = () => {
               primaryContactData={primaryContactData}
             />
           )}
-        </Box>
+        </HomePageBox>
       )}
     </>
   );
 };
+
+const HomePageBox = styled(Box)`
+  color: ${({ theme }) => theme.text};
+`;
 
 export default HomePage;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Box, Text } from "rebass";
 import { Link, useLocation } from "react-router-dom";
+import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,12 +15,10 @@ const Header = () => {
   let location = useLocation();
 
   return (
-    <Flex
+    <Banner
       flex={1}
       sx={{
-        padding: "25px",
-
-        color: "#fff"
+        padding: "25px"
       }}
       justifyContent="space-between"
       flexDirection={["column", "row"]}
@@ -63,7 +62,7 @@ const Header = () => {
           </Link>
         </Box>
       </Flex>
-    </Flex>
+    </Banner>
   );
 };
 
@@ -83,5 +82,10 @@ const getTitle = location => {
       return "Covid 19 Status";
   }
 };
+
+const Banner = styled(Flex)`
+  color: ${({ theme }) => theme.headerBannerText};
+  background-image: ${({ theme }) => theme.headerBanner};
+`;
 
 export default Header;
