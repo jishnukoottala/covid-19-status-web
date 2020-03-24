@@ -15,6 +15,7 @@ const HomePage = () => {
   const [deaths, setDeaths] = useState(null);
   const [stateData, setStateData] = useState(null);
   const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
+  const [lastOriginUpdate, setLastOriginUpdate] = useState(null);
   const [regionalContactData, setRegionalContactData] = useState(null);
   const [primaryContactData, setPrimaryContactData] = useState(null);
 
@@ -35,6 +36,7 @@ const HomePage = () => {
           setRecovered(data.data.summary.discharged);
           setDeaths(data.data.summary.deaths);
           setLastUpdatedTime(data.lastRefreshed);
+          setLastOriginUpdate(data.lastOriginUpdate);
         }
 
         //console.log("stateREsults - ", stateReport);
@@ -68,7 +70,7 @@ const HomePage = () => {
     <>
       {!confirmed && <Loader />}
       {confirmed && (
-        <HomePageBox mb={4} p={4}>
+        <HomePageBox mb={4}>
           <Flex
             flex={1}
             justifyContent="space-between"
@@ -79,7 +81,14 @@ const HomePage = () => {
             <StatusDashCard title={"Recovered"} text={recovered} />
             <StatusDashCard title={"Deaths"} text={deaths} />
           </Flex>
-          <FormattedDateCard updateTime={lastUpdatedTime} />
+          <FormattedDateCard
+            title={`Last refreshed : `}
+            updateTime={lastUpdatedTime}
+          />
+          <FormattedDateCard
+            title={`Last updated at source : `}
+            updateTime={lastOriginUpdate}
+          />
           <Box mt={3}>{stateData && <StateChart stateData={stateData} />}</Box>
           {regionalContactData && (
             <ContactNumberBox

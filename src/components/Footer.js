@@ -1,23 +1,19 @@
 import React from "react";
 import { Flex, Box } from "rebass";
 
-const Footer = ({ theme, setTheme }) => {
+const Footer = ({ theme, toggleTheme }) => {
   return (
-    <Flex
-      sx={{ width: "100%", padding: "16px", color: "#fff" }}
-      flexDirection="column"
-      mt={6}
-    >
+    <Flex sx={{ width: "100%", padding: "16px" }} flexDirection="column" mt={6}>
       <Box>
         <button
           onClick={() => {
-            setTheme(theme === "light" ? "dark" : "light");
+            toggleTheme();
           }}
         >
           Switch to {theme === "light" ? "dark theme" : "light theme"}
         </button>
       </Box>
-      <Box sx={{ color: "#fff" }}>Sources: </Box>
+      <Box>Sources: </Box>
       <FooterBox
         link="https://github.com/mathdroid/covid-19-api"
         text="Mathdroid"

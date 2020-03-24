@@ -97,9 +97,9 @@ const Dashboard = () => {
               width: "100%",
               padding: "16px"
             }}
-            flexDirection={["column", "row"]}
+            flexDirection="column"
           >
-            <Box width={["100%", 1 / 2]}>
+            <Box width="100%">
               <Flex flexDirection="column">
                 <Box sx={{ padding: "16px", fontSize: "1.5rem" }}>
                   <Label htmlFor="country">Country</Label>
@@ -158,9 +158,9 @@ const Dashboard = () => {
               </Flex>
             </Box>
 
-            <Box sx={{ padding: "16px" }} width={["100%", 1 / 2]}>
+            <Box sx={{ padding: "16px" }} width="100%" mt={3}>
               {globalSummary && (
-                <Box width={["100%", 700]} height={350}>
+                <Box width="100%" height={350}>
                   <Flex justifyContent="center" alignItems="center">
                     <Box>
                       <Text sx={{ fontSize: "1.8rem" }}>Country Status</Text>
@@ -168,7 +168,7 @@ const Dashboard = () => {
                   </Flex>
                   <ResponsivePie
                     data={data01}
-                    margin={{ top: 40, right: 60, bottom: 80, left: 120 }}
+                    margin={{ top: 50, bottom: 80 }}
                     innerRadius={0.5}
                     padAngle={0.7}
                     cornerRadius={3}

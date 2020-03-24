@@ -7,11 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGlobe,
   faHome,
-  faThList,
-  faQuestionCircle
+  faFlag,
+  faQuestionCircle,
+  faMoon,
+  faSun
 } from "@fortawesome/free-solid-svg-icons";
 
-const Header = () => {
+const Header = ({ theme, toggleTheme }) => {
   let location = useLocation();
 
   return (
@@ -42,13 +44,12 @@ const Header = () => {
           </Link>
         </Box>
         <Box px="8px">
-          <Link to="/world" as="div">
-            <FontAwesomeIcon icon={faThList} size="lg" color="#6a24c0" />
+          <Link to="/country" as="div">
+            <FontAwesomeIcon icon={faFlag} size="lg" color="#6a24c0" />
           </Link>
         </Box>
-
         <Box px="8px">
-          <Link to="/country" as="div">
+          <Link to="/world" as="div">
             <FontAwesomeIcon icon={faGlobe} size="lg" color="#6a24c0" />
           </Link>
         </Box>
@@ -60,6 +61,19 @@ const Header = () => {
               color="#6a24c0"
             />
           </Link>
+        </Box>
+        <Box px="8px">
+          <FontAwesomeIcon
+            icon={theme === "light" ? faMoon : faSun}
+            size="lg"
+            color="#6a24c0"
+            onClick={() => {
+              toggleTheme();
+            }}
+            style={{
+              cursor: "pointer"
+            }}
+          />
         </Box>
       </Flex>
     </Banner>
