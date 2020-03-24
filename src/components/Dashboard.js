@@ -24,8 +24,12 @@ const Dashboard = () => {
 
       const resp = await axios.get(`https://covid19.mathdro.id/api/`);
       const { data } = result;
-      //console.log("countries", countries);
-      setCountries(data);
+      //console.log("countries", data);
+
+      const countriesFiltered = data.countries.filter(item =>
+        item.hasOwnProperty("iso3")
+      );
+      setCountries(countriesFiltered);
       setCountry("IND");
       setGlobalSummary(resp.data);
       const today = new Date();
@@ -79,7 +83,8 @@ const Dashboard = () => {
   ];
 
   //   console.log("country data is ", countries);
-  console.log("country data-->  ", countryData);
+  console.log("country data-->  ", countries);
+
   return (
     <>
       {!countries && <Loader />}
@@ -107,16 +112,11 @@ const Dashboard = () => {
                       setCountry(e.target.value);
                     }}
                   >
-                    {Object.entries(countries.countries).map(
-                      ([country, value]) => (
-                        <option
-                          key={`${value}+${country}`}
-                          value={countries.iso3[value]}
-                        >
-                          {country}
-                        </option>
-                      )
-                    )}
+                    {countries.map(({ name, iso3 }) => (
+                      <option key={`${name}+${iso3}`} value={iso3}>
+                        {name}
+                      </option>
+                    ))}
                   </CountrySelectBox>
                 </Box>
 

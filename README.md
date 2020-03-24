@@ -21,9 +21,9 @@ Unofficial source
 
 #### Todos
 
-- Light/ dark theme
+- Light/ dark theme switch
 - Progressive Web App
-- Try to get more info
+- Try to get more info statewise
 - Linear graph to represent the virus growth
 - Designer svgs for DOs and DONTs
 - add 404 page
