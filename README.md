@@ -21,7 +21,7 @@ Unofficial source
 
 #### Todos
 
-- Light/ dark theme
+- Light/ dark theme switch
 - Progressive Web App
 - Try to get more info
 - Linear graph to represent the virus growth
