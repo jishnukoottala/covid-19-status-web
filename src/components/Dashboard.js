@@ -101,7 +101,7 @@ const Dashboard = () => {
           >
             <Box width="100%">
               <Flex flexDirection="column">
-                <Box sx={{ padding: "16px", fontSize: "1.5rem" }}>
+                <Box sx={{ fontSize: "1.5rem" }} p={4}>
                   <Label htmlFor="country">Country</Label>
                   <CountrySelectBox
                     id="country"
@@ -124,7 +124,7 @@ const Dashboard = () => {
                   <Box
                     sx={{
                       width: "100%",
-                      padding: "16px",
+                      padding: 4,
                       fontSize: "1.5rem"
                     }}
                   >
