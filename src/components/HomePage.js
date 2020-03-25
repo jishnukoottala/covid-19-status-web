@@ -84,6 +84,9 @@ const HomePage = () => {
       {!confirmed && <Loader />}
       {confirmed && (
         <HomePageBox mb={4}>
+          <Box textAlign="center" fontSize="1.2rem">
+            Some text change
+          </Box>
           <Flex
             flex={1}
             justifyContent="space-between"
