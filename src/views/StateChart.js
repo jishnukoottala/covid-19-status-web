@@ -27,7 +27,7 @@ const StateChart = ({ stateData }) => {
         data={stateDataToRender}
         keys={["Indian", "Foreign", "Discharged", "Deaths"]}
         indexBy="loc"
-        margin={{ top: 20, right: 30, bottom: 70, left: 90 }}
+        margin={{ top: 20, right: 30, bottom: 70, left: 120 }}
         padding={0.3}
         layout="horizontal"
         colors={["#c67c37", "#c0ca47", "#28c70f", "#d20a0a"]}

@@ -62,7 +62,11 @@ const SourcesCard = ({ title, sources }) => (
 
 const FooterBox = ({ link, text }) => (
   <Box p={3}>
-    <a href={`${link}`} target="__blank" style={{ color: "#800080" }}>
+    <a
+      href={`${link}`}
+      target="__blank"
+      style={{ color: "#800080", fontSize: "1.2rem" }}
+    >
       {text}
     </a>
   </Box>

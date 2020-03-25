@@ -25,8 +25,17 @@ const Footer = ({ theme, toggleTheme }) => {
           text="Department of Health and Family Welfare"
         /> */}
       </Flex>
-      <Flex p={3} justifyContent="space-between">
+      <Flex
+        p={3}
+        justifyContent="space-between"
+        flexDirection={["column", "row"]}
+      >
         <Flex>
+          <Box px={2}>
+            <Link to="/" as="div">
+              Home
+            </Link>
+          </Box>
           <Box px={2}>
             <Link to="/sources" as="div">
               Sources
@@ -39,7 +48,7 @@ const Footer = ({ theme, toggleTheme }) => {
           </Box>
         </Flex>
 
-        <Box>
+        <Box mt={[3, 0]}>
           <ThemeButton
             onClick={() => {
               toggleTheme();

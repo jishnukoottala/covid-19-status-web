@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
 }
 text {
   fill: ${({ theme }) => theme.chartText} !important;
+  
 }
   
   `;
