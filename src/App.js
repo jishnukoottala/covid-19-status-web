@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Dashboard from "./components/Dashboard";
 import HomePage from "./components/HomePage";
 import Header from "./components/Header";
@@ -16,7 +16,7 @@ import { useCacheBuster } from "./CacheBuster";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+const App = () => {
   const [theme, toggleTheme, componentMounted] = useThemeMode();
   const [loading, isLatestVersion, refreshCacheAndReload] = useCacheBuster();
 
@@ -26,9 +26,11 @@ function App() {
   if (loading) {
     return null;
   }
-  if (!loading && !isLatestVersion) {
+
+  if (!isLatestVersion) {
     refreshCacheAndReload();
   }
+
   return (
     <div>
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
@@ -57,6 +59,6 @@ function App() {
       </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;

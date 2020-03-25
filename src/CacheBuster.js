@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import packageJson from "../package.json";
 import axios from "axios";
 global.appVersion = packageJson.version;
@@ -19,29 +19,30 @@ const semverGreaterThan = (versionA, versionB) => {
   return false;
 };
 
-const useCacheBuster = () => {
-  const [loading, setLoading] = false;
-    const [isLatestVersion, setIsLatestVersion] = false;
-    
-   const  refreshCacheAndReload= () => {
-        console.log('Clearing cache and hard reloading...')
-        if (caches) {
-          // Service worker cache should be cleared with caches.delete()
-          caches.keys().then(function(names) {
-            for (let name of names) caches.delete(name);
-          });
-        }
+export const useCacheBuster = () => {
+  const [loading, setLoading] = useState(true);
+  const [isLatestVersion, setIsLatestVersion] = useState(true);
 
-        // delete browser cache and hard reload
-        window.location.reload(true);
+  const refreshCacheAndReload = () => {
+    console.log("Clearing cache and hard reloading...");
+    if (!isLatestVersion) {
+      if (caches) {
+        // Service worker cache should be cleared with caches.delete()
+        caches.keys().then(function(names) {
+          for (let name of names) caches.delete(name);
+        });
       }
-    };
-  }
+
+      // delete browser cache and hard reload
+      window.location.reload(true);
+    }
+  };
 
   useEffect(() => {
     async function fetchMeta() {
       const res = await axios("/meta.json");
-      const meta = await res.json();
+
+      const meta = res.data;
 
       const latestVersion = meta.version;
       const currentVersion = global.appVersion;
@@ -49,13 +50,15 @@ const useCacheBuster = () => {
         latestVersion,
         currentVersion
       );
-
+      console.log("latest version ", latestVersion);
+      console.log("current version ", currentVersion);
+      console.log("shouldForce refresh ", shouldForceRefresh);
       if (shouldForceRefresh) {
         console.log(
           `We have a new version - ${latestVersion}. Should force refresh`
         );
         setLoading(false);
-        setIsLatestVersion(isLatestVersion);
+        setIsLatestVersion(false);
       } else {
         console.log(
           `You already have the latest version - ${latestVersion}. No cache refresh needed.`
@@ -70,5 +73,3 @@ const useCacheBuster = () => {
 
   return [loading, isLatestVersion, refreshCacheAndReload];
 };
-
-export default useCacheBuster;
