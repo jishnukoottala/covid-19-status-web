@@ -31,9 +31,9 @@ const RankPage = () => {
     }
     fetchData();
   }, []);
-  console.log("response %%%%%%", globalData);
+
   return (
-    <Flex flexDirection="column" sx={{ color: "#fff" }}>
+    <Flex flexDirection="column">
       {globalData && dailyData && (
         <Box p={4}>
           <Flex

@@ -6,14 +6,15 @@ import {
   faUserCheck,
   faSkullCrossbones
 } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 
 const StatusDashCard = ({ type, title, text }) => {
   return (
-    <Box
+    <StatusCardBox
       sx={{
         padding: [3, 5],
         border: "1px solid #1b8abe",
-        boxShadow: "3px 3px #5b4e4e",
+
         minWidth: ["100%", "320px"],
         maxWidth: ["100%", "320px"]
       }}
@@ -36,7 +37,7 @@ const StatusDashCard = ({ type, title, text }) => {
               }
               color={
                 title === "Confirmed"
-                  ? "#acbc26"
+                  ? "#e9ae40"
                   : title === "Recovered"
                   ? "green"
                   : "red"
@@ -52,8 +53,15 @@ const StatusDashCard = ({ type, title, text }) => {
           <Text fontSize="1.5rem">{text}</Text>
         </Box>
       </Flex>
-    </Box>
+    </StatusCardBox>
   );
 };
+
+const StatusCardBox = styled(Box)`
+  -webkit-box-shadow: ${({ theme }) => theme.statusCardBoxShadow};
+  -moz-box-shadow: ${({ theme }) => theme.statusCardBoxShadow};
+  box-shadow: ${({ theme }) => theme.statusCardBoxShadow};
+  border-radius: 8px;
+`;
 
 export default StatusDashCard;

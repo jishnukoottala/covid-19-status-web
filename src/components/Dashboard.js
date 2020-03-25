@@ -7,6 +7,7 @@ import StatusDashCard from "../views/StatusDashCard";
 import FormattedDateCard from "../views/FormattedDateCard";
 
 import { ResponsivePie } from "@nivo/pie";
+import styled from "styled-components";
 
 const Dashboard = () => {
   const [countryData, setCountryData] = useState(null);
@@ -94,16 +95,15 @@ const Dashboard = () => {
             flex={1}
             sx={{
               width: "100%",
-              padding: "16px",
-              color: "#fff"
+              padding: "16px"
             }}
-            flexDirection={["column", "row"]}
+            flexDirection="column"
           >
-            <Box width={["100%", 1 / 2]}>
+            <Box width="100%">
               <Flex flexDirection="column">
-                <Box sx={{ padding: "16px", fontSize: "1.5rem" }}>
+                <Box sx={{ fontSize: "1.5rem" }} p={4}>
                   <Label htmlFor="country">Country</Label>
-                  <Select
+                  <CountrySelectBox
                     id="country"
                     name="country"
                     defaultValue="IND"
@@ -111,24 +111,20 @@ const Dashboard = () => {
                     onChange={e => {
                       setCountry(e.target.value);
                     }}
-                    sx={{
-                      backgroundColor: "black",
-                      color: "white"
-                    }}
                   >
                     {countries.map(({ name, iso3 }) => (
                       <option key={`${name}+${iso3}`} value={iso3}>
                         {name}
                       </option>
                     ))}
-                  </Select>
+                  </CountrySelectBox>
                 </Box>
 
                 {countryError && (
                   <Box
                     sx={{
                       width: "100%",
-                      padding: "16px",
+                      padding: 4,
                       fontSize: "1.5rem"
                     }}
                   >
@@ -162,9 +158,9 @@ const Dashboard = () => {
               </Flex>
             </Box>
 
-            <Box sx={{ padding: "16px" }} width={["100%", 1 / 2]}>
+            <Box sx={{ padding: "16px" }} width="100%" mt={3}>
               {globalSummary && (
-                <Box width={["100%", 700]} height={350}>
+                <Box width="100%" height={350}>
                   <Flex justifyContent="center" alignItems="center">
                     <Box>
                       <Text sx={{ fontSize: "1.8rem" }}>Country Status</Text>
@@ -172,7 +168,7 @@ const Dashboard = () => {
                   </Flex>
                   <ResponsivePie
                     data={data01}
-                    margin={{ top: 40, right: 60, bottom: 80, left: 120 }}
+                    margin={{ top: 50, bottom: 80 }}
                     innerRadius={0.5}
                     padAngle={0.7}
                     cornerRadius={3}
@@ -295,5 +291,10 @@ const Dashboard = () => {
     </>
   );
 };
+
+const CountrySelectBox = styled(Select)`
+  color: ${({ theme }) => theme.text};
+  background-color: ${({ theme }) => theme.body};
+`;
 
 export default Dashboard;

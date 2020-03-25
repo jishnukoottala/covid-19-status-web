@@ -6,7 +6,7 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 const ContactNumberBox = ({ contactDetails, primaryContactData }) => {
   console.log("primary contact data ,", primaryContactData);
   return (
-    <Box mt={6} style={{ color: "#fff" }} p={4}>
+    <Box mt={6} p={4}>
       <Flex py={4}>
         <Flex sx={{ alignItems: "center" }} pr={3}>
           <FontAwesomeIcon icon={faPhone} color="#4cff73" size="lg" />

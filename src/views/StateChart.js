@@ -27,10 +27,10 @@ const StateChart = ({ stateData }) => {
         data={stateDataToRender}
         keys={["Indian", "Foreign", "Discharged", "Deaths"]}
         indexBy="loc"
-        margin={{ top: 20, right: 30, bottom: 70, left: 90 }}
+        margin={{ top: 20, right: 30, bottom: 70, left: 120 }}
         padding={0.3}
         layout="horizontal"
-        colors={["#bc5718", "#f3ae30", "#28c70f", "#d20a0a"]}
+        colors={["#c67c37", "#c0ca47", "#28c70f", "#d20a0a"]}
         tooltip={function(stateInfo) {
           return (
             <span style={{ color: "#000" }}>
@@ -72,14 +72,14 @@ const StateChart = ({ stateData }) => {
             anchor: "bottom",
             direction: "row",
             justify: false,
-            translateX: -20,
+            translateX: -18,
             translateY: 68,
-            itemsSpacing: 6,
-            itemWidth: 86,
+            itemsSpacing: 4,
+            itemWidth: 80,
             itemHeight: 20,
             itemDirection: "left-to-right",
             itemOpacity: 0.85,
-            symbolSize: 20,
+            symbolSize: 16,
             effects: [
               {
                 on: "hover",
