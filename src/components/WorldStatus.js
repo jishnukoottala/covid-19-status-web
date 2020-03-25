@@ -37,7 +37,6 @@ const WorldStatus = () => {
               flex={1}
               justifyContent="space-between"
               flexDirection={["column", "row"]}
-              p={4}
             >
               <StatusDashCard
                 title={"Confirmed"}
@@ -49,7 +48,12 @@ const WorldStatus = () => {
               />
               <StatusDashCard title={"Deaths"} text={globalData.deaths.value} />
             </Flex>
-            <FormattedDateCard updateTime={globalData.lastUpdate} />
+            <Box mt={3}>
+              <FormattedDateCard
+                title="Last Refreshed : "
+                updateTime={globalData.lastUpdate}
+              />
+            </Box>
           </Box>
         )}
       </Flex>

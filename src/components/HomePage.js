@@ -56,7 +56,20 @@ const HomePage = () => {
             : null
         );
         if (latestReport.status === 200) {
-          setStateData(latestReport.data.data.regional);
+          // const sortedData = data && data.sort((a, b) => b.deaths - a.deaths); // ordering the data by descending  order of death
+          const regionalData = latestReport.data.data.regional;
+
+          const regionalSortedData = regionalData.sort((a, b) => {
+            if (a.loc > b.loc) {
+              return -1;
+            }
+            if (a.loc < b.loc) {
+              return 1;
+            }
+            return 0;
+          });
+
+          setStateData(regionalSortedData);
         }
       } catch (error) {}
     }
