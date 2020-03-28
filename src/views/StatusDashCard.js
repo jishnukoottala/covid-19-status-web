@@ -4,9 +4,51 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShieldAlt,
   faUserCheck,
-  faSkullCrossbones
+  faSkullCrossbones,
+  faVials,
+  faCheck,
+  faCheckCircle,
+  faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+
+const getIcon = title => {
+  switch (title) {
+    case "Confirmed":
+      return faUserCheck;
+    case "Recovered":
+      return faShieldAlt;
+    case "Total Samples Tested":
+      return faVials;
+    case "Deaths":
+      return faSkullCrossbones;
+    case "Tested Individuals":
+      return faUserCheck;
+    case "Positive Cases":
+      return faUserPlus;
+    default:
+      return faCheckCircle;
+  }
+};
+
+const getColor = title => {
+  switch (title) {
+    case "Confirmed":
+      return "#e9ae40";
+    case "Recovered":
+      return "green";
+    case "Total Samples Tested":
+      return "green";
+    case "Deaths":
+      return "red";
+    case "Tested Individuals":
+      return "purple";
+    case "Positive Cases":
+      return "red";
+    default:
+      return faCheckCircle;
+  }
+};
 
 const StatusDashCard = ({ type, title, text }) => {
   return (
@@ -28,24 +70,12 @@ const StatusDashCard = ({ type, title, text }) => {
         >
           <Box px="6px" textAlign="center">
             <FontAwesomeIcon
-              icon={
-                title === "Confirmed"
-                  ? faUserCheck
-                  : title === "Recovered"
-                  ? faShieldAlt
-                  : faSkullCrossbones
-              }
-              color={
-                title === "Confirmed"
-                  ? "#e9ae40"
-                  : title === "Recovered"
-                  ? "green"
-                  : "red"
-              }
+              icon={getIcon(title)}
+              color={getColor(title)}
               size="2x"
             />
           </Box>{" "}
-          <Box px="6px" textAlign="center">
+          <Box px="2px" textAlign="center">
             <Text fontSize="2rem">{title}</Text>
           </Box>
         </Flex>
