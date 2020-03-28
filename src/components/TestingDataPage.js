@@ -33,7 +33,7 @@ const TestingDataPage = () => {
   }, []);
 
   return (
-    <Box p={4}>
+    <Box p={[1, 4]}>
       {!testSummaryData && <Loader />}
       {testSummaryData && (
         <Box p={4}>
@@ -62,7 +62,7 @@ const TestingDataPage = () => {
             />
           </Box>
           <Flex flexDirection="column" p={4}>
-            <Box p={4}>
+            <Box p={[1, 4]}>
               <Text fontSize="1.6rem">When to get tested for COVID 19?</Text>{" "}
             </Box>
             <Box p={1}>
@@ -73,7 +73,7 @@ const TestingDataPage = () => {
               </Text>
             </Box>
 
-            <Box p={4}>
+            <Box p={[1, 4]}>
               <Text fontSize="1.6rem">Whom to Test?</Text>{" "}
             </Box>
             <Box p={1}>
@@ -101,7 +101,7 @@ const TestingDataPage = () => {
                 </li>
               </ul>
             </Box>
-            <Box p={4}>
+            <Box p={[1, 4]}>
               <Box p={3}>
                 <a
                   href="https://icmr.nic.in/sites/default/files/upload_documents/Govt_COVID19_Testing_Lab_28032020.pdf"
