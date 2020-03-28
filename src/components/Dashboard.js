@@ -36,9 +36,6 @@ const Dashboard = () => {
       const formattedDate = `${today.getMonth() + 1}-${today.getDate() -
         1}-${today.getFullYear()}`;
       console.log("formatted date", formattedDate);
-      //   let daily = await axios.get(
-      //     `https://covid19.mathdro.id/api/daily/${formattedDate}`
-      //   );
     }
     fetchData();
   }, []);
@@ -120,7 +117,7 @@ const Dashboard = () => {
                   </CountrySelectBox>
                 </Box>
 
-                {countryError && (
+                {!countryData && (
                   <Box
                     sx={{
                       width: "100%",
@@ -294,7 +291,7 @@ const Dashboard = () => {
 
 const CountrySelectBox = styled(Select)`
   color: ${({ theme }) => theme.text};
-  background-color: ${({ theme }) => theme.body};
+  background-color: ${({ theme }) => theme.body} !important;
 `;
 
 export default Dashboard;
