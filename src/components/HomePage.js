@@ -41,8 +41,6 @@ const HomePage = () => {
           setLastOriginUpdate(data.lastOriginUpdate);
         }
 
-        //console.log("stateREsults - ", stateReport);
-
         let contactDetails = await axios.get(
           `https://api.rootnet.in/covid19-in/contacts`
         );
@@ -61,7 +59,7 @@ const HomePage = () => {
           // const sortedData = data && data.sort((a, b) => b.deaths - a.deaths); // ordering the data by descending  order of death
           const regionalData = latestReport.data.data.regional;
 
-          const regionalSortedData = regionalData.sort((a, b) => {
+          const regionalSortedData = regionalData.slice().sort((a, b) => {
             if (a.loc > b.loc) {
               return -1;
             }
@@ -78,8 +76,6 @@ const HomePage = () => {
 
     getData();
   }, []);
-
-  //console.log("regionalContacts is -- ",);
 
   return (
     <>
