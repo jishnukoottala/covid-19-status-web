@@ -24,7 +24,6 @@ const Dashboard = () => {
 
       const resp = await axios.get(`https://covid19.mathdro.id/api/`);
       const { data } = result;
-      //console.log("countries", data);
 
       const countriesFiltered = data.countries.filter(item =>
         item.hasOwnProperty("iso3")
@@ -35,7 +34,6 @@ const Dashboard = () => {
       const today = new Date();
       const formattedDate = `${today.getMonth() + 1}-${today.getDate() -
         1}-${today.getFullYear()}`;
-      console.log("formatted date", formattedDate);
     }
     fetchData();
   }, []);
@@ -78,9 +76,6 @@ const Dashboard = () => {
       color: "hsl(304, 70%, 50%)"
     }
   ];
-
-  //   console.log("country data is ", countries);
-  console.log("country data-->  ", countries);
 
   return (
     <>
