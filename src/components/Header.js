@@ -91,6 +91,8 @@ const getTitle = location => {
       return "Covid 19 Status - World";
     case "/faq":
       return "Covid 19 - FAQ";
+    case "/awareness":
+      return "Awareness regarding Novel Coronavirus";
 
     default:
       return "Covid 19 Status";
