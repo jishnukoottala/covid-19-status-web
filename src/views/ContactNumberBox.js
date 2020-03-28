@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const ContactNumberBox = ({ contactDetails, primaryContactData }) => {
-  console.log("primary contact data ,", primaryContactData);
   return (
     <Box mt={6} p={4}>
       <Flex py={4}>
