@@ -23,11 +23,40 @@ const apisources = [
   }
 ];
 
+const awarenesSources = [
+  {
+    text: "World Health Organization",
+    link:
+      "https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public"
+  }
+];
+
+const awarenessPictures = [
+  {
+    text: "Wash hands - created by shayne_ch13",
+    link: "https://www.freepik.com/free-photos-vectors/water"
+  },
+  {
+    text: "Social distancing - created by freepik",
+    link: "https://www.freepik.com/free-photos-vectors/people"
+  },
+  {
+    text: "Avoid touching - pic from fox news",
+    link:
+      "https://www.foxnews.com/health/coronavirus-prevention-tips-how-to-stop-touching-your-face"
+  }
+];
+
 const Sources = () => {
   return (
     <Box mt={4} p={4} mb={4}>
       <SourcesCard title="Sources" sources={sources} />
       <SourcesCard title="API Sources" sources={apisources} />
+      <SourcesCard title="Awarenes Page" sources={awarenesSources} />
+      <SourcesCard
+        title="Protective Measures Pictures"
+        sources={awarenessPictures}
+      />
     </Box>
   );
 };
