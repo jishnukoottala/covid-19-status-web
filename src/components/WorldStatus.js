@@ -93,7 +93,7 @@ const WorldStatus = () => {
     if (sortBy === "confirmed") {
       setCountriesList(
         countriesList &&
-          countriesList.slice().sort((a, b) => a.confirmed - b.confirmed)
+          countriesList.slice().sort((a, b) => b.confirmed - a.confirmed)
       );
     }
     if (sortBy === "deaths") {
