@@ -57,7 +57,14 @@ const HomePage = () => {
         );
         if (latestReport.status === 200) {
           // const sortedData = data && data.sort((a, b) => b.deaths - a.deaths); // ordering the data by descending  order of death
-          const regionalData = latestReport.data.data.regional;
+          const regionalData = latestReport.data.data.regional.map(item => {
+            if (item.loc === "Andaman and Nicobar Islands") {
+              item.loc = "Andaman and Nicobar";
+              return item;
+            } else {
+              return item;
+            }
+          });
 
           const regionalSortedData = regionalData.slice().sort((a, b) => {
             if (a.loc > b.loc) {
