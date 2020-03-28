@@ -3,6 +3,8 @@ import { Flex, Box, Text, Card } from "rebass";
 import styled from "styled-components";
 import Slider from "infinite-react-carousel";
 import wash from "../assets/images/wash.jpg";
+import Social from "../assets/images/social.jpg";
+import touch from "../assets/images/touch.jpg";
 
 const preventiveAwareness = [
   {
@@ -12,11 +14,13 @@ const preventiveAwareness = [
       "<p> Regularly and thoroughly clean your hands with an alcohol-based hand rub or wash them with soap and water. Washing your hands with soap and water or using alcohol-based hand rub kills viruses that may be on your hands.</p>"
   },
   {
+    img: Social,
     title: "Maintain social distancing",
     data:
       "<p> Maintain at least 1 metre (3 feet) distance between yourself and anyone who is coughing or sneezing. When someone coughs or sneezes they spray small liquid droplets from their nose or mouth which may contain virus. If you are too close, you can breathe in the droplets, including the COVID-19 virus if the person coughing has the disease   </p > "
   },
   {
+    img: touch,
     title: "Avoid touching eyes, nose and mouth",
     data:
       "<p> Hands touch many surfaces and can pick up viruses. Once contaminated, hands can transfer the virus to your eyes, nose or mouth. From there, the virus can enter your body and can make you sick.</p>"
@@ -41,8 +45,10 @@ const preventiveAwareness = [
 const Awareness = () => {
   return (
     <Box p={3}>
-      <Box mt={4} mb={4}>
-        <Text fontSize="1.5rem">Protective Measures</Text>
+      <Box mt={4} mb={4} textAlign="center">
+        <Text fontSize="1.9rem" fontWeight="bold">
+          Protective Measures
+        </Text>
       </Box>
       <Slider dots>
         {preventiveAwareness.map(awar => (
@@ -53,13 +59,15 @@ const Awareness = () => {
               </Box>
               <Box className="pict">
                 {" "}
-                <img
-                  className="pict"
-                  src={awar.img}
-                  alt="wash hands"
-                  height="100%"
-                  width="100%"
-                />
+                {awar.img && (
+                  <img
+                    className="pict"
+                    src={awar.img}
+                    alt="wash hands"
+                    height="100%"
+                    width="100%"
+                  />
+                )}
               </Box>
 
               <Box
