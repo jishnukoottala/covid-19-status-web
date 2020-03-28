@@ -1,10 +1,13 @@
 import React from "react";
-import { Flex, Box, Text, Card } from "rebass";
+import { Box, Text } from "rebass";
 import styled from "styled-components";
 import Slider from "infinite-react-carousel";
 import wash from "../assets/images/wash.jpg";
 import Social from "../assets/images/social.jpg";
 import touch from "../assets/images/touch.jpg";
+import cough from "../assets/images/cough.jpg";
+import medical from "../assets/images/medical.jpg";
+import home from "../assets/images/home.jpg";
 
 const preventiveAwareness = [
   {
@@ -26,16 +29,19 @@ const preventiveAwareness = [
       "<p> Hands touch many surfaces and can pick up viruses. Once contaminated, hands can transfer the virus to your eyes, nose or mouth. From there, the virus can enter your body and can make you sick.</p>"
   },
   {
+    img: cough,
     title: "Practice respiratory hygiene",
     data:
       "<p> Make sure you, and the people around you, follow good respiratory hygiene. This means covering your mouth and nose with your bent elbow or tissue when you cough or sneeze. Then dispose of the used tissue immediately. <br/>Why? Droplets spread virus. By following good respiratory hygiene you protect the people around you from viruses such as cold, flu and COVID-19.</p>"
   },
   {
+    img: medical,
     title: "Seek medical care early",
     data:
       "<p>Stay home if you feel unwell. If you have a fever, cough and difficulty breathing, seek medical attention and call in advance. Follow the directions of your local health authority.</p>"
   },
   {
+    img: home,
     title: "Stay at home",
     data:
       "<p>Avoiding contact with others and visits to medical facilities will allow these facilities to operate more effectively and help protect you and others from possible COVID-19 and other viruses. </p>"
@@ -44,8 +50,8 @@ const preventiveAwareness = [
 
 const Awareness = () => {
   return (
-    <Box p={3}>
-      <Box mt={4} mb={4} textAlign="center">
+    <Box p={3} pt={1}>
+      <Box mb={4} textAlign="center">
         <Text fontSize="1.9rem" fontWeight="bold">
           Protective Measures
         </Text>
