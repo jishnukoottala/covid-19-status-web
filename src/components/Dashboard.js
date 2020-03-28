@@ -149,7 +149,10 @@ const Dashboard = () => {
                         text={countryData.deaths.value}
                       />
                     </Flex>
-                    <FormattedDateCard updateTime={countryData.lastUpdate} />
+                    <FormattedDateCard
+                      title="Last refreshed : "
+                      updateTime={countryData.lastUpdate}
+                    />
                   </>
                 )}
               </Flex>
