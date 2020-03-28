@@ -8,6 +8,7 @@ import StateChart from "../views/StateChart";
 import ContactNumberBox from "../views/ContactNumberBox";
 import Loader from "../views/Loader";
 import FormattedDateCard from "../views/FormattedDateCard";
+import StateTableData from "../views/StateTableData";
 
 const HomePage = () => {
   const [confirmed, setConfirmed] = useState(null);
@@ -18,6 +19,7 @@ const HomePage = () => {
   const [lastOriginUpdate, setLastOriginUpdate] = useState(null);
   const [regionalContactData, setRegionalContactData] = useState(null);
   const [primaryContactData, setPrimaryContactData] = useState(null);
+  const [viewStatewise, setViewStatewise] = useState("chart");
 
   useEffect(() => {
     async function getData() {
@@ -102,7 +104,22 @@ const HomePage = () => {
             title={`Last updated at source : `}
             updateTime={lastOriginUpdate}
           />
-          <Box mt={3}>{stateData && <StateChart stateData={stateData} />}</Box>
+          <Box mt={3}>
+            {stateData && viewStatewise === "chart" && (
+              <StateChart
+                stateData={stateData}
+                setViewStatewise={setViewStatewise}
+              />
+            )}
+          </Box>
+          <Box mt={3}>
+            {stateData && viewStatewise === "table" && (
+              <StateTableData
+                stateData={stateData}
+                setViewStatewise={setViewStatewise}
+              />
+            )}
+          </Box>
           {regionalContactData && (
             <ContactNumberBox
               contactDetails={regionalContactData}
