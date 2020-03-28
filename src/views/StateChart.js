@@ -1,10 +1,11 @@
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex, Text, Button } from "rebass";
 import { ResponsiveBar } from "@nivo/bar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChartBar } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 
-const StateChart = ({ stateData }) => {
+const StateChart = ({ stateData, setViewStatewise }) => {
   const stateDataToRender = stateData.map(item => ({
     ...item,
     confirmedCasesIndianColor: "green",
@@ -17,11 +18,19 @@ const StateChart = ({ stateData }) => {
 
   return (
     <Box height={600} sx={{ minHeight: 500, backgroundColor: "inherit" }}>
-      <Flex p={4}>
+      <Flex p={4} pb={0}>
         <Flex sx={{ alignItems: "center" }} pr={2}>
           <FontAwesomeIcon icon={faChartBar} color="#ff4c4c" size="lg" />
         </Flex>{" "}
         <Text fontSize="1.5rem">State wise Status</Text>
+        <ViewButton
+          onClick={() => {
+            setViewStatewise("table");
+          }}
+          sx={{ textDecoration: "underline" }}
+        >
+          <Text sx={{ opacity: "0.65" }}>Change view</Text>
+        </ViewButton>
       </Flex>
       <ResponsiveBar
         data={stateDataToRender}
@@ -97,5 +106,14 @@ const StateChart = ({ stateData }) => {
     </Box>
   );
 };
+
+const ViewButton = styled(Button)`
+  color: ${({ theme }) => theme.text} !important;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+`;
 
 export default StateChart;
