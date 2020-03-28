@@ -7,7 +7,8 @@ export const lightTheme = {
   headerBannerText: "#222",
   chartText: "#000",
   statusCardBoxShadow: "3px 3px 18px -14px rgba(0,0,0,1)",
-  inactiveDots: "#000"
+  inactiveDots: "#000",
+  stateTableBorderBottom: "#0000001f"
 };
 
 export const darkTheme = {
@@ -19,5 +20,6 @@ export const darkTheme = {
   gradient: "linear-gradient(#091236, #1E215D)",
   chartText: "#fff",
   statusCardBoxShadow: "3px 3px 18px -14px rgba(255,255,255,1)",
-  inactiveDots: "#fff"
+  inactiveDots: "#fff",
+  stateTableBorderBottom: "#ffffff4d"
 };
