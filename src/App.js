@@ -8,6 +8,7 @@ import FAQPage from "./components/FAQ";
 import WorldStatus from "./components/WorldStatus";
 import Sources from "./views/Sources";
 import Awareness from "./components/Awareness";
+import TestingDataPage from "./components/TestingDataPage";
 
 import { ThemeProvider } from "styled-components";
 import { useThemeMode } from "./config/themeMode";
@@ -56,6 +57,9 @@ const App = () => {
             </Route>
             <Route path="/awareness">
               <Awareness />
+            </Route>
+            <Route path="/testing">
+              <TestingDataPage />
             </Route>
           </Switch>
 
