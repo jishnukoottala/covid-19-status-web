@@ -23,7 +23,7 @@ export const useThemeMode = () => {
     if (localTheme) {
       setTheme(localTheme);
     } else {
-      setTheme("light");
+      setTheme("light"); // default theme
       window.localStorage.setItem("theme", "light");
     }
     setComponentMounted(true);

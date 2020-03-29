@@ -27,5 +27,10 @@ text {
   fill: ${({ theme }) => theme.chartText} !important;
   
 }
+
+.carousel-dots li button:before{
+  color:${({ theme }) => theme.inactiveDots} !important;
+  opacity:0.3;
+}
   
   `;

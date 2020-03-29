@@ -10,7 +10,9 @@ import {
   faFlag,
   faQuestionCircle,
   faMoon,
-  faSun
+  faSun,
+  faBullhorn,
+  faVial
 } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ theme, toggleTheme }) => {
@@ -62,6 +64,17 @@ const Header = ({ theme, toggleTheme }) => {
             />
           </Link>
         </Box>
+
+        <Box px="8px">
+          <Link to="/awareness" as="div">
+            <FontAwesomeIcon icon={faBullhorn} size="lg" color="#6a24c0" />
+          </Link>
+        </Box>
+        <Box px="8px">
+          <Link to="/testing" as="div">
+            <FontAwesomeIcon icon={faVial} size="lg" color="#6a24c0" />
+          </Link>
+        </Box>
         <Box px="8px">
           <FontAwesomeIcon
             icon={theme === "light" ? faMoon : faSun}
@@ -91,6 +104,10 @@ const getTitle = location => {
       return "Covid 19 Status - World";
     case "/faq":
       return "Covid 19 - FAQ";
+    case "/awareness":
+      return "Awareness regarding Novel Coronavirus";
+    case "/testing":
+      return "Covid 19 - Testing in India";
 
     default:
       return "Covid 19 Status";

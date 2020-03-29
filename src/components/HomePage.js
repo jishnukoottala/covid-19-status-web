@@ -8,6 +8,7 @@ import StateChart from "../views/StateChart";
 import ContactNumberBox from "../views/ContactNumberBox";
 import Loader from "../views/Loader";
 import FormattedDateCard from "../views/FormattedDateCard";
+import StateTableData from "../views/StateTableData";
 
 const HomePage = () => {
   const [confirmed, setConfirmed] = useState(null);
@@ -18,6 +19,7 @@ const HomePage = () => {
   const [lastOriginUpdate, setLastOriginUpdate] = useState(null);
   const [regionalContactData, setRegionalContactData] = useState(null);
   const [primaryContactData, setPrimaryContactData] = useState(null);
+  const [viewStatewise, setViewStatewise] = useState("chart");
 
   useEffect(() => {
     async function getData() {
@@ -39,8 +41,6 @@ const HomePage = () => {
           setLastOriginUpdate(data.lastOriginUpdate);
         }
 
-        //console.log("stateREsults - ", stateReport);
-
         let contactDetails = await axios.get(
           `https://api.rootnet.in/covid19-in/contacts`
         );
@@ -57,9 +57,16 @@ const HomePage = () => {
         );
         if (latestReport.status === 200) {
           // const sortedData = data && data.sort((a, b) => b.deaths - a.deaths); // ordering the data by descending  order of death
-          const regionalData = latestReport.data.data.regional;
+          const regionalData = latestReport.data.data.regional.map(item => {
+            if (item.loc === "Andaman and Nicobar Islands") {
+              item.loc = "Andaman and Nicobar";
+              return item;
+            } else {
+              return item;
+            }
+          });
 
-          const regionalSortedData = regionalData.sort((a, b) => {
+          const regionalSortedData = regionalData.slice().sort((a, b) => {
             if (a.loc > b.loc) {
               return -1;
             }
@@ -76,8 +83,6 @@ const HomePage = () => {
 
     getData();
   }, []);
-
-  //console.log("regionalContacts is -- ",);
 
   return (
     <>
@@ -102,7 +107,22 @@ const HomePage = () => {
             title={`Last updated at source : `}
             updateTime={lastOriginUpdate}
           />
-          <Box mt={3}>{stateData && <StateChart stateData={stateData} />}</Box>
+          <Box mt={3}>
+            {stateData && viewStatewise === "chart" && (
+              <StateChart
+                stateData={stateData}
+                setViewStatewise={setViewStatewise}
+              />
+            )}
+          </Box>
+          <Box mt={3}>
+            {stateData && viewStatewise === "table" && (
+              <StateTableData
+                stateData={stateData}
+                setViewStatewise={setViewStatewise}
+              />
+            )}
+          </Box>
           {regionalContactData && (
             <ContactNumberBox
               contactDetails={regionalContactData}

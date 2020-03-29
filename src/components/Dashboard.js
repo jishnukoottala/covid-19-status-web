@@ -24,7 +24,6 @@ const Dashboard = () => {
 
       const resp = await axios.get(`https://covid19.mathdro.id/api/`);
       const { data } = result;
-      //console.log("countries", data);
 
       const countriesFiltered = data.countries.filter(item =>
         item.hasOwnProperty("iso3")
@@ -35,10 +34,6 @@ const Dashboard = () => {
       const today = new Date();
       const formattedDate = `${today.getMonth() + 1}-${today.getDate() -
         1}-${today.getFullYear()}`;
-      console.log("formatted date", formattedDate);
-      //   let daily = await axios.get(
-      //     `https://covid19.mathdro.id/api/daily/${formattedDate}`
-      //   );
     }
     fetchData();
   }, []);
@@ -82,9 +77,6 @@ const Dashboard = () => {
     }
   ];
 
-  //   console.log("country data is ", countries);
-  console.log("country data-->  ", countries);
-
   return (
     <>
       {!countries && <Loader />}
@@ -120,7 +112,7 @@ const Dashboard = () => {
                   </CountrySelectBox>
                 </Box>
 
-                {countryError && (
+                {!countryData && (
                   <Box
                     sx={{
                       width: "100%",
@@ -152,7 +144,10 @@ const Dashboard = () => {
                         text={countryData.deaths.value}
                       />
                     </Flex>
-                    <FormattedDateCard updateTime={countryData.lastUpdate} />
+                    <FormattedDateCard
+                      title="Last refreshed : "
+                      updateTime={countryData.lastUpdate}
+                    />
                   </>
                 )}
               </Flex>
@@ -294,7 +289,7 @@ const Dashboard = () => {
 
 const CountrySelectBox = styled(Select)`
   color: ${({ theme }) => theme.text};
-  background-color: ${({ theme }) => theme.body};
+  background-color: ${({ theme }) => theme.body} !important;
 `;
 
 export default Dashboard;
